@@ -1,0 +1,104 @@
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    font-weight: var(--weight-regular);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Requirement: no horizontal document scrollbar at any width from 320px. */
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-heading);
+    margin: 0;
+  }
+
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+  }
+
+  /* Genesis § Elevation: "Focus states use a 3px indigo ring ... rather than a
+     shadow." Applied globally so no control can ship without a focus indicator. */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+    box-shadow: var(--ring-focus);
+  }
+
+  /* Do not paint a focus ring for pointer interaction, only keyboard. */
+  :focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  /* Backend money, dates and counts must never wrap mid-value. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+}
+
+@layer utilities {
+  /* Long unbroken backend values — invoice numbers, emails, GSTINs, timezone
+     names, photo URLs — wrap instead of forcing a horizontal scrollbar. */
+  .break-value {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .container-page {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+  }
+}
+
+/* Requirement 24: prefers-reduced-motion removes translation, scale and
+   duration. Framer Motion is additionally gated in code via useReducedMotion, so
+   this rule is the belt to that braces and also covers plain CSS transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}

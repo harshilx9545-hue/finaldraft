@@ -1,0 +1,116 @@
+/* ---------------------------------------------------------------------------
+ * MK00 design tokens — derived verbatim from genesis-DESIGN.md.
+ *
+ * genesis-DESIGN.md is the sole visual authority. Every value below is traceable
+ * to a named entry in that document. Components must never declare a raw colour,
+ * radius, spacing or shadow value; they consume these tokens through the Tailwind
+ * theme in tailwind.config.ts.
+ *
+ * Theme: light only. Genesis's Do-list asks for contrast in "both light and dark
+ * modes", but Genesis defines no dark surface, background, text or border value
+ * anywhere in the file. Inventing one would mean shipping a palette the design
+ * system does not specify, so the light theme is implemented and the gap is
+ * recorded in LIMITATIONS.md.
+ * ------------------------------------------------------------------------- */
+
+:root {
+  /* --- Colors (genesis-DESIGN.md § Colors) --- */
+  --color-primary: #6366f1; /* CTAs, active states, links, focus rings */
+  --color-primary-hover: #4f46e5; /* hover on primary elements */
+  --color-secondary: #20970b; /* reserved by Genesis for its own homepage brand
+                                 highlight; declared for fidelity, applied nowhere
+                                 in MK00 — see LIMITATIONS.md */
+  --color-neutral: #9c9c9c; /* muted text, placeholders, timestamps, disabled */
+  --color-background: #fafafa; /* page background */
+  --color-surface: #ffffff; /* cards, panels, modals, nav backdrop */
+  --color-text-primary: #0a0a0a; /* headings, body, primary labels */
+  --color-text-secondary: #6b6b6b; /* descriptions, metadata, secondary labels */
+  --color-border: #e8e8ec; /* card borders, dividers, input borders */
+  --color-success: #10b981; /* published/settled/active, confirmations */
+  --color-warning: #f59e0b; /* pending/open states, caution */
+  --color-error: #ef4444; /* destructive, validation errors, rejected */
+
+  /* Chip surfaces. Genesis § Components > Chips names "gray-100 background,
+     gray-600 text"; these are those two values, tokenised so no component
+     reaches for a Tailwind default palette entry. */
+  --color-chip-surface: #f3f4f6;
+  --color-chip-text: #4b5563;
+
+  /* Alpha derivations, declared here so no component composes rgba() inline. */
+  --color-primary-ring: rgba(99, 102, 241, 0.12);
+  --color-primary-glow: rgba(99, 102, 241, 0.35);
+  --color-shadow-card: rgba(0, 0, 0, 0.08);
+  --color-shadow-elevated: rgba(0, 0, 0, 0.1);
+
+  /* --- Typography (genesis-DESIGN.md § Typography) --- */
+  --font-display: 'General Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'DM Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Mono', Consolas, monospace;
+
+  --text-display: 72px;
+  --text-headline: 60px;
+  --text-section: 32px;
+  --text-subhead: 24px;
+  --text-body: 15px;
+  --text-small: 13px;
+  --text-caption: 12px;
+  --text-overline: 11px;
+  /* Not in Genesis's Type Scale table, but stated explicitly by two of its
+     component specs: "Inputs ... 14px font size" and "Nav links: 14px medium
+     weight". Tokenised so controls do not reach for an arbitrary value. */
+  --text-control: 14px;
+
+  /* Genesis: "tight letter spacing (-0.03em to -0.04em)" on display and headings */
+  --tracking-display: -0.04em;
+  --tracking-heading: -0.03em;
+  --tracking-overline: 0.08em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+
+  /* --- Spacing (genesis-DESIGN.md § Spacing, base unit 4px) --- */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-96: 96px;
+
+  /* --- Layout --- */
+  --container-max: 1280px;
+  --container-pad: 24px;
+  --nav-height: 56px;
+  --section-gap-mobile: 32px;
+  --section-gap-tablet: 48px;
+  --section-gap-desktop: 64px;
+  --card-grid-gap: 24px;
+
+  /* --- Border radius (genesis-DESIGN.md § Border Radius) --- */
+  --radius-chip: 4px; /* tags, chips, badges, inline code */
+  --radius-control: 6px; /* buttons, inputs, selects */
+  --radius-panel: 8px; /* metadata cards, dropdowns, panels */
+  --radius-card: 12px; /* content cards, search bar, featured sections */
+  --radius-pill: 9999px; /* avatars, status dots, pill badges */
+
+  /* --- Elevation (genesis-DESIGN.md § Elevation) ---
+     Genesis is explicit: static elements carry no shadow. Elevation belongs to
+     hover and focus only, plus dropdowns and modals. */
+  --shadow-card-hover: 0 8px 30px var(--color-shadow-card);
+  --shadow-button-hover: 0 4px 12px var(--color-primary-glow);
+  --shadow-elevated: 0 10px 15px -3px var(--color-shadow-elevated),
+    0 4px 6px -4px var(--color-shadow-elevated);
+  --ring-focus: 0 0 0 3px var(--color-primary-ring);
+
+  /* --- Motion --- */
+  --duration-fast: 140ms;
+  --duration-base: 200ms;
+  --duration-slow: 240ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
